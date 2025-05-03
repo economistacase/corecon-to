@@ -1,0 +1,12 @@
+{
+    "https://api.shinyapps.io": {
+        "server_url": "https://api.shinyapps.io",
+        "filename": "/home/runner/work/corecon-to/corecon-to",
+        "app_url": "https://economistacase.shinyapps.io/previsao_macro/",
+        "app_id": 14675264,
+        "app_guid": null,
+        "title": "previsao_macro",
+        "app_mode": "python-shiny",
+        "app_store_version": 1
+    }
+}
