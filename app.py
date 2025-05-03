@@ -68,13 +68,13 @@ app_ui = ui.page_navbar(
         )
     ),
     title = ui.img(
-        src = "https://drive.google.com/file/d/1vO0BI7atxhBKopdV9Oiyj94z8lhTXhZN/view?usp=drive_link",
-        height = 35
+        src = "https://i.imgur.com/dGvmnLA.png",# link direto da imagem
+        height = 65
         ),
-    window_title = "Indicadores e Projeções",
+    window_title = "Painel de Previsões",
     fillable = True,
     fillable_mobile = True,
-    theme = theme.minty,
+    theme = theme.cyborg,
     sidebar = ui.sidebar(
         ui.markdown("Dashboard para acompanhar e simular previsões de indicadores macroeconômicos do Brasil."),
         # Inputs
@@ -111,7 +111,7 @@ app_ui = ui.page_navbar(
 
 # Servidor ----
 def server(input, output, session):
-    
+
     def plotar_grafico(y, df, y_label):
 
         modelos1 = [y] + list(input.modelo())
@@ -154,21 +154,20 @@ def server(input, output, session):
                     "Câmbio": "black",
                     "PIB": "black",
                     "Selic": "black",
-                    "IA": "green",
-                    "Ridge": "blue",
-                    "Bayesian Ridge": "orange",
-                    "Huber": "red",
-                    "Ensemble": "brown"
-                },
-               
+                    "IA": "#F94144",
+                    "Ridge": "#F9C74F",
+                    "Bayesian Ridge": "#277DA1",
+                    "Huber": "#9D4EDD",
+                    "Ensemble": "#FF6D00"
+                }
             ) +
             p9.scale_fill_manual(
                 values = {
-                    "IA": "green",
-                    "Ridge": "blue",
-                    "Bayesian Ridge": "orange",
-                    "Huber": "red",
-                    "Ensemble": "brown"
+                    "IA": "#43AA8B88",
+                    "Ridge": "#F9C74F88",
+                    "Bayesian Ridge": "#277DA188",
+                    "Huber": "#9D4EDD88",
+                    "Ensemble": "#FF6D0088"
                 }
             ) +
             p9.labs(
@@ -176,7 +175,18 @@ def server(input, output, session):
                 x = "",
                 color = ""
             ) +
-            p9.theme(legend_position = "bottom")
+            
+            p9.theme(
+                panel_background=p9.element_rect(fill="#f9f9f9"), #fundo interno dos gráficos
+                plot_background=p9.element_rect(fill="#ffffff"), #fundo da área de plot
+                panel_grid_major=p9.element_line(color="#d0d0d0", size=0.3),
+                panel_grid_minor=p9.element_blank(),
+                legend_position="bottom",
+                axis_text_x=p9.element_text(size=8, color="#333"),
+                axis_text_y=p9.element_text(size=8, color="#333"),
+                axis_title_y=p9.element_text(size=9, weight="bold"),
+                plot_title=p9.element_text(size=11, weight="bold")
+            )
         )
 
         return plt
