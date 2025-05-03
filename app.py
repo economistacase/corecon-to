@@ -31,24 +31,22 @@ modelos = (
     .unique()
     .tolist()
 )
-
-
 # Interface do Usuário ----
 app_ui = ui.page_navbar(
-    # Outputs
+       # Outputs
     ui.nav_panel(
         "",
         ui.layout_columns(
             ui.navset_card_underline(
                 ui.nav_panel("", ui.output_plot("ipca_plt"), icon = icon_svg("chart-line"), value = "plt"),
                 ui.nav_panel("", ui.output_data_frame("ipca_tbl"), icon = icon_svg("table"), value = "tbl"),
-                title = "Inflação (IPCA)",
+                title = ui.strong("Inflação (IPCA)"),
                 selected = "plt"
             ),
             ui.navset_card_underline(
                 ui.nav_panel("", ui.output_plot("cambio_plt"), icon = icon_svg("chart-line"), value = "plt"),
                 ui.nav_panel("", ui.output_data_frame("cambio_tbl"), icon = icon_svg("table"), value = "tbl"),
-                title = "Taxa de Câmbio (BRL/USD)",
+                title = ui.strong("Taxa de Câmbio (BRL/USD)"),
                 selected = "plt"
             )
         ),
@@ -56,25 +54,25 @@ app_ui = ui.page_navbar(
             ui.navset_card_underline(
                 ui.nav_panel("", ui.output_plot("pib_plt"), icon = icon_svg("chart-line"), value = "plt"),
                 ui.nav_panel("", ui.output_data_frame("pib_tbl"), icon = icon_svg("table"), value = "tbl"),
-                title = "Atividade Econômica (PIB)",
+                title = ui.strong("Atividade Econômica (PIB)"),
                 selected = "plt"
             ),
             ui.navset_card_underline(
                 ui.nav_panel("", ui.output_plot("selic_plt"), icon = icon_svg("chart-line"), value = "plt"),
                 ui.nav_panel("", ui.output_data_frame("selic_tbl"), icon = icon_svg("table"), value = "tbl"),
-                title = "Taxa de Juros (SELIC)",
+                title = ui.strong("Taxa de Juros (SELIC)"),
                 selected = "plt"
             )
         )
     ),
-    title = ui.img(
+   title = ui.img(
         src = "https://i.imgur.com/dGvmnLA.png",# link direto da imagem
         height = 65
         ),
     window_title = "Painel de Previsões",
     fillable = True,
     fillable_mobile = True,
-    theme = theme.cyborg,
+    theme = theme.darkly,
     sidebar = ui.sidebar(
         ui.markdown("Dashboard para acompanhar e simular previsões de indicadores macroeconômicos do Brasil."),
         # Inputs
