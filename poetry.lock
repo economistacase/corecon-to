@@ -706,7 +706,7 @@ grpcio = {version = ">=1.49.1,<2.0dev", optional = true, markers = "python_versi
 grpcio-status = {version = ">=1.49.1,<2.0.dev0", optional = true, markers = "python_version >= \"3.11\" and extra == \"grpc\""}
 proto-plus = [
     {version = ">=1.25.0,<2.0.0", markers = "python_version >= \"3.13\""},
-    {version = ">=1.22.3,<2.0.0"},
+    {version = ">=1.22.3,<2.0.0", markers = "python_version < \"3.13\""},
 ]
 protobuf = ">=3.19.5,<3.20.0 || >3.20.0,<3.20.1 || >3.20.1,<4.21.0 || >4.21.0,<4.21.1 || >4.21.1,<4.21.2 || >4.21.2,<4.21.3 || >4.21.3,<4.21.4 || >4.21.4,<4.21.5 || >4.21.5,<7.0.0"
 requests = ">=2.18.0,<3.0.0"
@@ -1365,34 +1365,6 @@ files = [
 ]
 
 [[package]]
-name = "mizani"
-version = "0.11.4"
-description = "Scales for Python"
-optional = false
-python-versions = ">=3.9"
-groups = ["main"]
-files = [
-    {file = "mizani-0.11.4-py3-none-any.whl", hash = "sha256:5b6271dc3da2c88694dca2e0e0a7e1879f0e2fb046c789776f54d090a5243735"},
-    {file = "mizani-0.11.4.tar.gz", hash = "sha256:9fdb79e88602ca29132613b428d6c1e8af436e88e37d55a0f8eb99fe044c9bc2"},
-]
-
-[package.dependencies]
-numpy = ">=1.23.0"
-pandas = ">=2.1.0"
-scipy = ">=1.7.0"
-tzdata = {version = "*", markers = "platform_system == \"Windows\" or platform_system == \"Emscripten\""}
-
-[package.extras]
-all = ["mizani[build]", "mizani[dev]", "mizani[doc]", "mizani[lint]", "mizani[test]"]
-build = ["build", "wheel"]
-dev = ["mizani[typing]", "notebook", "pre-commit", "twine"]
-doc = ["numpydoc (>=1.6.0)", "sphinx (>=7.2.0)"]
-lint = ["ruff"]
-rtd = ["mock"]
-test = ["pytest-cov"]
-typing = ["pandas-stubs", "pyright (==1.1.364)"]
-
-[[package]]
 name = "narwhals"
 version = "1.37.1"
 description = "Extremely lightweight compatibility layer between dataframe libraries"
@@ -1821,34 +1793,20 @@ typing = ["typing-extensions ; python_version < \"3.10\""]
 xmp = ["defusedxml"]
 
 [[package]]
-name = "plotnine"
-version = "0.13.6"
-description = "A Grammar of Graphics for Python"
+name = "plotly"
+version = "5.24.1"
+description = "An open-source, interactive data visualization library for Python"
 optional = false
-python-versions = ">=3.9"
+python-versions = ">=3.8"
 groups = ["main"]
 files = [
-    {file = "plotnine-0.13.6-py3-none-any.whl", hash = "sha256:4acc1af29fa4e91e726b67d49277e8368f62e1c817f01bf14ecd8ca5e83bfaea"},
-    {file = "plotnine-0.13.6.tar.gz", hash = "sha256:3c8c8f958c295345140230ea29803488f83aba9b5a8d0b1b2eb3eaefbf0a06b8"},
+    {file = "plotly-5.24.1-py3-none-any.whl", hash = "sha256:f67073a1e637eb0dc3e46324d9d51e2fe76e9727c892dde64ddf1e1b51f29089"},
+    {file = "plotly-5.24.1.tar.gz", hash = "sha256:dbc8ac8339d248a4bcc36e08a5659bacfe1b079390b8953533f4eb22169b4bae"},
 ]
 
 [package.dependencies]
-matplotlib = ">=3.7.0"
-mizani = ">=0.11.0,<0.12.0"
-numpy = ">=1.23.0"
-pandas = ">=2.1.0,<3.0.0"
-scipy = ">=1.7.0"
-statsmodels = ">=0.14.0"
-
-[package.extras]
-all = ["plotnine[build]", "plotnine[dev]", "plotnine[doc]", "plotnine[extra]", "plotnine[lint]", "plotnine[test]"]
-build = ["build", "wheel"]
-dev = ["plotnine[typing]", "pre-commit", "twine"]
-doc = ["click", "importlib-resources", "jupyter", "nbsphinx", "numpydoc (>=0.9.1)", "quartodoc (>=0.7.2)"]
-extra = ["adjustText", "geopandas", "scikit-learn", "scikit-misc (>=0.3.0)"]
-lint = ["ruff"]
-test = ["pytest-cov"]
-typing = ["ipython", "pandas-stubs", "pyright (==1.1.362)"]
+packaging = "*"
+tenacity = ">=6.2.0"
 
 [[package]]
 name = "prompt-toolkit"
@@ -2711,6 +2669,22 @@ develop = ["colorama", "cython (>=3.0.10)", "cython (>=3.0.10,<4)", "flake8", "i
 docs = ["ipykernel", "jupyter-client", "matplotlib", "nbconvert", "nbformat", "numpydoc", "pandas-datareader", "sphinx"]
 
 [[package]]
+name = "tenacity"
+version = "9.1.2"
+description = "Retry code until it succeeds"
+optional = false
+python-versions = ">=3.9"
+groups = ["main"]
+files = [
+    {file = "tenacity-9.1.2-py3-none-any.whl", hash = "sha256:f77bf36710d8b73a50b2dd155c97b870017ad21afe6ab300326b0371b3b05138"},
+    {file = "tenacity-9.1.2.tar.gz", hash = "sha256:1169d376c297e7de388d18b4481760d478b0e99a777cad3a9c86e556f4b697cb"},
+]
+
+[package.extras]
+doc = ["reno", "sphinx"]
+test = ["pytest", "tornado (>=4.5)", "typeguard"]
+
+[[package]]
 name = "threadpoolctl"
 version = "3.6.0"
 description = "threadpoolctl"
@@ -3028,4 +3002,4 @@ files = [
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "5a85691ed60c71e8f969872a10e6164412502276d4bc04832f5bdd926e26d6a6"
+content-hash = "8068a6ac6372329e693b133c6b80d18542906a52ab0a6bde144865abd4e3f0e8"

@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "previsao-macro"
+name = "Dashboard"
 version = "0.1.0"
 description = "Projeto Dashboard Corecon-TO."
 authors = ["Raimundo Casé <economistacase@gmail.com>"]
@@ -15,10 +15,11 @@ pyarrow = "^17.0.0"
 fastparquet = "^2024.5.0"
 skforecast = "^0.13.0"
 scikit-learn = "^1.5.1"
+shiny = "^1.4.0"
 statsmodels = "^0.14.2"
-shiny = "^1.0.0"
 shinyswatch = "^0.7.0"
-plotnine = "^0.13.6"
+plotly = "^5.24.1"
+matplotlib = "^3.9.0"
 google-generativeai = "^0.7.2"
 faicons = "^0.2.2"
 
@@ -26,3 +27,6 @@ faicons = "^0.2.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+
