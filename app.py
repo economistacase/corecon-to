@@ -74,36 +74,71 @@ app_ui = ui.page_navbar(
     ui.nav_panel(
         "",
         ui.layout_columns(
-            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("ipca_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("ipca_tbl"), icon=icon_svg("table"), value="tbl"), title="Inflação (IPCA)", selected="plt"),
-            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("cambio_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("cambio_tbl"), icon=icon_svg("table"), value="tbl"), title="Taxa de Câmbio (BRL/USD)", selected="plt")
+            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("ipca_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("ipca_tbl"), icon=icon_svg("table"), value="tbl"), title= ui.div(ui.strong("Inflação (IPCA)")), selected="plt"),
+            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("cambio_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("cambio_tbl"), icon=icon_svg("table"), value="tbl"), title= ui.div(ui.strong("Taxa de Câmbio (BRL/USD)")), selected="plt")
         ),
+        
         ui.layout_columns(
-            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("pib_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("pib_tbl"), icon=icon_svg("table"), value="tbl"), title="Atividade Econômica (PIB)", selected="plt"),
-            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("selic_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("selic_tbl"), icon=icon_svg("table"), value="tbl"), title="Taxa de Juros (SELIC)", selected="plt")
+            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("pib_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("pib_tbl"), icon=icon_svg("table"), value="tbl"), title=ui.div(ui.strong("Atividade Econômica (PIB)")), selected="plt"),
+            ui.navset_card_underline(ui.nav_panel("", ui.output_ui("selic_plt_ui"), icon=icon_svg("chart-line"), value="plt"), ui.nav_panel("", ui.output_data_frame("selic_tbl"), icon=icon_svg("table"), value="tbl"), title= ui.div(ui.strong("Taxa de Juros (SELIC)")), selected="plt")
         )
     ),
+ 
     # Agora, os argumentos de palavra-chave
     header=ui.head_content(
         ui.tags.script(src="https://cdn.plot.ly/plotly-latest.min.js")
     ),
-    title=ui.HTML('<a href="#"><img src="https://raw.githubusercontent.com/datasciencecasestudy/logos/main/logo_previsoes_macro.png" height="35" alt="Logo Previsões Macro"></a>'),
-    window_title="Painel Macro: Indicadores e Projeções", 
+title=ui.div(
+        # Imagem da Logomarca
+        ui.img(
+            src="https://i.imgur.com/dGvmnLA.png",
+            style=(
+                "height: 70px; "  # Tente um valor fixo, ajuste conforme necessário
+                "width: auto; "     # Mantém a proporção
+                "margin-right: 10px; "
+                "flex-shrink: 0;"   # Impede que a imagem encolha se não houver espaço
+            )
+        ),
+        # Texto ao lado da logomarca
+        ui.span(
+            "Painel de Previsões Macroeconômicas",
+            style=(
+                "color: #f0f0f0; "
+                "font-size: 1.5rem; " # Ajuste o tamanho da fonte se necessário
+                "font-weight: bold; "
+                "white-space: nowrap; " # Impede que o texto quebre em várias linhas
+                "line-height: 40px;"    # Tenta alinhar com a altura da imagem
+            )
+        ),
+        # Estilo CSS para o ui.div que o torna um container flexbox
+        style=(
+            "display: flex; "         # Habilita o layout flexbox (itens lado a lado por padrão)
+            "flex-direction: row; "   # Garante que os itens fiquem em linha (horizontalmente)
+            "align-items: center; "   # Alinha os itens verticalmente ao centro
+            "height: 100%;"            # Faz o div tentar usar a altura total da área do título
+            "overflow: hidden;"       # Pode ajudar se o conteúdo estiver tentando estourar
+        )
+    ),
+
+    window_title="<b>Painel de Previsões Macroeconômicas</b>", # Ajustado para corresponder ao texto do título
+   
+     
     fillable=True, 
     fillable_mobile=True, 
-    theme=theme.minty,
+    theme=theme.flatly,
     sidebar=ui.sidebar(
-        ui.markdown("Dashboard para acompanhar e simular previsões de indicadores macroeconômicos do Brasil."),
-        ui.input_selectize(id="modelo", label=ui.strong("Selecionar modelos:"), choices=modelos_disponiveis, selected=modelos_disponiveis, multiple=True, width="100%", options={"plugins": ["clear_button"]}),
+        ui.markdown("<b> Dashboard para acompanhar e simular previsões de indicadores macroeconômicos do Brasil.</b>"),
+        ui.input_checkbox_group(id="modelo", label=ui.strong("Selecionar modelos:"), choices=modelos_disponiveis, selected=modelos_disponiveis),
         ui.input_date(id="inicio", label=ui.strong("Início do gráfico:"), value=datas["value"], min=datas["min"], max=datas["max"], format="mm/yyyy", startview="year", language="pt-BR", width="100%"),
         ui.input_checkbox(id="ic", label=ui.strong("Intervalo de confiança"), value=True, width="100%"),
-        ui.markdown("Elaboração: Raimundo Casé - economista")
+        ui.markdown("<b> Elaboração</b>: Raimundo Casé - economista")
     )
 )
 
 # Servidor ----
 def server(input, output, session):
     color_map = {
-        "IPCA": "black", "Câmbio": "black", "PIB": "black", "Selic": "black",
+        "IPCA": "DarkBlue", "Câmbio": "#8B4513", "PIB": "black", "Selic": "OrangeRed",
         "IA": "green", "Ridge Regression": "blue", "Bayesian Ridge Regression": "orange",
         "Huber Regression": "red", "Ensemble": "brown"
     }
@@ -139,9 +174,29 @@ def server(input, output, session):
                     try: rgba_color = matplotlib.colors.to_rgba(cor_original_modelo, alpha=0.2); cor_fill = f'rgba({int(rgba_color[0]*255)},{int(rgba_color[1]*255)},{int(rgba_color[2]*255)},{rgba_color[3]})'
                     except ValueError: cor_fill = 'rgba(128,128,128,0.2)'
                     fig.add_trace(go.Scatter(x=df_modelo_ic['Data'].tolist() + df_modelo_ic['Data'].tolist()[::-1], y=df_modelo_ic['Intervalo Superior'].tolist() + df_modelo_ic['Intervalo Inferior'].tolist()[::-1], fill='toself', fillcolor=cor_fill, line=dict(color='rgba(255,255,255,0)'), hoverinfo="skip", showlegend=False, name=f"IC {modelo_tipo_ic}"))
-        fig.update_layout(legend_title_text="", legend_orientation="h", legend_xanchor="center", legend_x=0.5, legend_yanchor="bottom", legend_y=-0.3, hovermode="x unified", height=400, margin=dict(t=20, b=80, l=30, r=30))
-        fig.update_xaxes(dtick="M12", tickformat="%Y")
-        print(f"Figura final para '{y_tipo_principal}' criada. Traços: {len(fig.data) if fig and hasattr(fig, 'data') else 'Fig None/sem data'}"); print(f"--- Saindo de plotar_grafico_plotly para: {y_tipo_principal} ---\n")
+        fig.update_layout(legend_title_text=" ", legend_orientation="h", legend_xanchor="center", legend_x=0.5, legend_yanchor="bottom", legend_y=-0.2, hovermode="x", height=500, margin=dict(t=40, b=120, l=60, r=40), plot_bgcolor="#f0f3ff", paper_bgcolor="#f3f3f4", font = dict(family="Times New Roman, Arial", size=14), hoverlabel_align="left", hoverlabel_namelength=-1, xaxis_hoverformat="")
+    
+    # Dentro da função plotar_grafico_plotly, após fig.update_layout(...)
+        fig.update_xaxes(
+            title_text="",
+            dtick="M12",      # Isso define os marcadores principais do eixo (a cada 12 meses)
+            tickformat="%Y",  # Isso formata esses marcadores principais para mostrar apenas o ano
+            ##hoverformat="%m/%Y" # NOVO: Isso formata o valor de X exibido no tooltip para Mês/Ano
+                                 # Exemplo: 01/2023, 02/2023, etc.
+                                 # Se seus dados tiverem dias específicos que são importantes,
+                                 # você pode usar "%d/%m/%Y"
+            showgrid=True, gridwidth=1, gridcolor ="rgba(128,128,128,0.2)", tickfont_color="black"
+        )
+
+ # NOVO: Definir o hovertemplate para todos os traços, AGORA INCLUINDO A DATA
+        fig.update_traces(
+             hovertemplate="<b>%{data.name}</b><br>" + # Nome da série (ex: IPCA, Ridge Regression) em negrito
+                  "Data: %{x|%m/%Y}<br>" +       # Data formatada como Mês/Ano
+                  f"{y_label_grafico}: %{{y:.2f}}" +  # Rótulo do eixo Y e valor com 2 casas decimais
+                  "<extra></extra>" # Remove o "trace N" e outras informações extras
+        )
+
+        print(f"Figura final para '{y_tipo_principal}' criada e customizada. Traços: {len(fig.data) if fig and hasattr(fig, 'data') else 'Fig None/sem data'}"); print(f"--- Saindo de plotar_grafico_plotly para: {y_tipo_principal} ---\n")
         return fig
 
     def imprimir_tabela(df_completo, y_tipo_principal):
