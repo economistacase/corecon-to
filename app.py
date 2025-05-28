@@ -93,7 +93,7 @@ title=ui.div(
         ui.img(
             src="https://i.imgur.com/dGvmnLA.png",
             style=(
-                "height: 70px; "  # Tente um valor fixo, ajuste conforme necessário
+                "height: 70px; "  # Ajuste conforme necessário
                 "width: auto; "     # Mantém a proporção
                 "margin-right: 10px; "
                 "flex-shrink: 0;"   # Impede que a imagem encolha se não houver espaço
